@@ -1,4 +1,17 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+char randomCharacter() {
+    int rl = (rand() % 26) + 'a';
+    return (char) rl;
+}
+
+void fillTable(char array[], int len) {
+    for (int i = 0; i < len; i++) {
+        array[i] = randomCharacter();
+    }
+}
 
 int countOddNumber() {
     int liczba, count = 0;
@@ -12,7 +25,11 @@ int countOddNumber() {
     return count;
 }
 
-void secondOption(int wybranaOpcja);
+int upperChars(char array[], int len) {
+    for (int i = 0; i < len; i++) {
+        array[i] = toupper(array[i]);
+    }
+};
 
 void thirdOption(int wybranaOpcja);
 
@@ -32,8 +49,19 @@ int main_menu(int indeks, int rokStudiow) {
             case 1:
                 printf("Uzytkownik wpisal %d liczb nieparzystych\n", countOddNumber());
                 break;
-            case 2:
-                secondOption(wybranaOpcja);
+            case 2: {
+                char tablica[25];
+                int len;
+                len = sizeof(tablica);
+                fillTable(tablica, len);
+                for (int i = 0; i < len; i++) {
+                    printf("%c\n", tablica[i]);
+                }
+                upperChars(tablica, len);
+                for (int i = 0; i < len; i++) {
+                    printf("%c\n", tablica[i]);
+                }
+            }
                 break;
             case 3:
                 thirdOption(wybranaOpcja);
@@ -44,8 +72,8 @@ int main_menu(int indeks, int rokStudiow) {
     printf("Do widzenia!");
 }
 
-void main() {
-    int indeks = 173654, rokStudiow = 1, wybranaOpcja;
+int main() {
+    int indeks = 173654, rokStudiow = 1;
     main_menu(indeks, rokStudiow);
-
+    return 0;
 }
