@@ -50,6 +50,7 @@ int main_menu(int indeks, int rokStudiow) {
                 printf("Uzytkownik wpisal %d liczb nieparzystych\n", countOddNumber());
                 break;
             case 2: {
+                fff
                 char tablica[25];
                 int len;
                 len = sizeof(tablica);
