@@ -20,19 +20,39 @@ int countOddNumber() {
     return count;
 }
 
-int upperChars(char array[], int len) {
+void upperChars(char array[], int len) {
     for (int i = 0; i < len; i++) {
         array[i] = toupper(array[i]);
     }
-};
+}
 
-void thirdOption(int wybranaOpcja);
+float *getMemory(int n) {
+    float *x;
+    x = (float *) calloc(n, sizeof(float));
+    return x;
+}
+
+void freeMemory(float *pointer) {
+    (void) free(pointer);
+}
+
+int maxIndex(float *array, int len) {
+    int maxIndex = 0;
+    int maxValue = 0;
+    for (int i = 0; i < len; i++) {
+        if (*(array + i) > maxValue) {
+            maxIndex = i;
+            maxValue = *(array + i);
+        }
+    }
+    return maxIndex;
+}
 
 void defaultOption() {
     printf("Wybrano opcje z poza zakresu\n");
 }
 
-int main_menu(int indeks, int rokStudiow) {
+void main_menu(int indeks, int rokStudiow) {
     int wybranaOpcja;
     do {
         printf("Program w jezyku C wykonany przez studenta o indeksie nr %d na %d roku studiow\n", indeks, rokStudiow);
@@ -59,7 +79,21 @@ int main_menu(int indeks, int rokStudiow) {
             }
                 break;
             case 3:
-                //thirdOption(wybranaOpcja);
+                printf("podaj liczbe elementow: ");
+                int len;
+                scanf("%d", &len);
+                float *pt;
+                pt = getMemory(len);
+                for (int i = 0; i < len; ++i) {
+                    float q;
+                    scanf("%f", &q);
+                    *(pt + i) = q;
+                    printf("%f\n", *(pt + i));
+                }
+                int max = maxIndex(pt, len);
+                printf("Max indeks tablicy: %d\n", max);
+                freeMemory(pt);
+                break;
             default:
                 defaultOption();
         }
