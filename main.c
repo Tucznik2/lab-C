@@ -2,14 +2,9 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-char randomCharacter() {
-    int rl = (rand() % 26) + 'a';
-    return (char) rl;
-}
-
 void fillTable(char array[], int len) {
     for (int i = 0; i < len; i++) {
-        array[i] = randomCharacter();
+        scanf(" %c", &array[i]);
     }
 }
 
@@ -50,10 +45,9 @@ int main_menu(int indeks, int rokStudiow) {
                 printf("Uzytkownik wpisal %d liczb nieparzystych\n", countOddNumber());
                 break;
             case 2: {
-                fff
-                char tablica[25];
+                char tablica[5];
                 int len;
-                len = sizeof(tablica);
+                len = sizeof(tablica) / sizeof(tablica[0]);
                 fillTable(tablica, len);
                 for (int i = 0; i < len; i++) {
                     printf("%c\n", tablica[i]);
@@ -65,7 +59,7 @@ int main_menu(int indeks, int rokStudiow) {
             }
                 break;
             case 3:
-                thirdOption(wybranaOpcja);
+                //thirdOption(wybranaOpcja);
             default:
                 defaultOption();
         }
