@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-void fillTable(char array[], int len) {
+char fillTable(char *array, int len) {
+    char q;
     for (int i = 0; i < len; i++) {
-        scanf(" %c", &array[i]);
+        scanf(" %c", &q);
+        *(array + i) = q;
     }
 }
 
@@ -20,15 +22,20 @@ int countOddNumber() {
     return count;
 }
 
-void upperChars(char array[], int len) {
+void upperChars(char *array, int len) {
     for (int i = 0; i < len; i++) {
-        array[i] = toupper(array[i]);
+        *(array + i) = toupper(*(array + i));
     }
 }
 
 float *getMemory(int n) {
     float *x;
     x = (float *) calloc(n, sizeof(float));
+    return x;
+}
+
+char *getMemoryC(int n) {
+    char *x = (char *) malloc(n * sizeof(char));
     return x;
 }
 
@@ -65,17 +72,19 @@ void main_menu(int indeks, int rokStudiow) {
                 printf("Uzytkownik wpisal %d liczb nieparzystych\n", countOddNumber());
                 break;
             case 2: {
-                char tablica[5];
+                char *pt;
                 int len;
-                len = sizeof(tablica) / sizeof(tablica[0]);
-                fillTable(tablica, len);
+                scanf("%d", &len);
+                pt = getMemoryC(len);
+                fillTable(pt, len);
                 for (int i = 0; i < len; i++) {
-                    printf("%c\n", tablica[i]);
+                    printf("%c\n", *(pt + i));
                 }
-                upperChars(tablica, len);
+                upperChars(pt, len);
                 for (int i = 0; i < len; i++) {
-                    printf("%c\n", tablica[i]);
+                    printf("%c\n", *(pt + i));
                 }
+                (void) free(pt);
             }
                 break;
             case 3:
@@ -88,7 +97,6 @@ void main_menu(int indeks, int rokStudiow) {
                     float q;
                     scanf("%f", &q);
                     *(pt + i) = q;
-                    printf("%f\n", *(pt + i));
                 }
                 int max = maxIndex(pt, len);
                 printf("Max indeks tablicy: %d\n", max);
